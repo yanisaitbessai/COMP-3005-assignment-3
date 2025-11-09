@@ -5,13 +5,21 @@ Author: Yanis Ait Bessai
 Date: 2025/11/05
 
 This program connects to a PostgreSQL database and performs CRUD operations
-on the 'students' table.
+(Create, Read, Update, Delete) on the 'students' table.
 """
 
 import psycopg2
 from psycopg2 import sql
 
-# ---------- Database Connection ----------
+# ==============================================================
+# Function: get_connection()
+# Purpose: Establish and return a connection to the PostgreSQL database
+# Notes:
+#   - The connection parameters (host, database, user, password)
+#     must match your local PostgreSQL setup.
+#   - The returned connection object is used by other functions
+#     to execute SQL queries.
+# ==============================================================
 def get_connection():
     return psycopg2.connect(
         host="localhost",
@@ -20,8 +28,18 @@ def get_connection():
         password="student"  
     )
 
-# ---------- CRUD Functions ----------
 
+# ==============================================================
+# Function: getAllStudents()
+# Purpose:
+#   - Retrieve and display all student records from the 'students' table.
+#   - Performs a simple SELECT query ordered by student_id.
+# Steps:
+#   1. Connect to the database.
+#   2. Execute a SELECT * query.
+#   3. Fetch all rows and print them to the console.
+#   4. Close the cursor and connection.
+# ==============================================================
 def getAllStudents():
     """Retrieve and display all students."""
     conn = get_connection()
@@ -35,6 +53,21 @@ def getAllStudents():
     conn.close()
 
 
+# ==============================================================
+# Function: addStudent(first_name, last_name, email, enrollment_date)
+# Purpose:
+#   - Add a new student record into the 'students' table.
+# Parameters:
+#   first_name (str)  → Student's first name
+#   last_name (str)   → Student's last name
+#   email (str)       → Student's email address
+#   enrollment_date (str) → Enrollment date in 'YYYY-MM-DD' format
+# Steps:
+#   1. Connect to the database.
+#   2. Execute an INSERT query with parameterized values.
+#   3. Commit the transaction.
+#   4. Print confirmation message.
+# ==============================================================
 def addStudent(first_name, last_name, email, enrollment_date):
     """Insert a new student record."""
     conn = get_connection()
@@ -49,6 +82,19 @@ def addStudent(first_name, last_name, email, enrollment_date):
     conn.close()
 
 
+# ==============================================================
+# Function: updateStudentEmail(student_id, new_email)
+# Purpose:
+#   - Update the email address of an existing student.
+# Parameters:
+#   student_id (int)  → The unique ID of the student to update
+#   new_email (str)   → The new email address to assign
+# Steps:
+#   1. Connect to the database.
+#   2. Execute an UPDATE query targeting the student_id.
+#   3. Commit the transaction.
+#   4. Print a confirmation message showing the update.
+# ==============================================================
 def updateStudentEmail(student_id, new_email):
     """Update email for a given student."""
     conn = get_connection()
@@ -62,6 +108,18 @@ def updateStudentEmail(student_id, new_email):
     conn.close()
 
 
+# ==============================================================
+# Function: deleteStudent(student_id)
+# Purpose:
+#   - Delete a student record based on their unique student_id.
+# Parameters:
+#   student_id (int)  → The ID of the student to be removed
+# Steps:
+#   1. Connect to the database.
+#   2. Execute a DELETE query.
+#   3. Commit the transaction.
+#   4. Print a confirmation message.
+# ==============================================================
 def deleteStudent(student_id):
     """Delete a student by ID."""
     conn = get_connection()
@@ -73,7 +131,17 @@ def deleteStudent(student_id):
     conn.close()
 
 
-# ---------- Demonstration ----------
+# ==============================================================
+# Demonstration Section
+# Purpose:
+#   - This section runs automatically when the program is executed directly.
+#   - It demonstrates all four CRUD operations in sequence:
+#       1. Display all students (initial data)
+#       2. Add a new student
+#       3. Update a student's email
+#       4. Delete a student record
+#       5. Display all students again after each operation
+# ==============================================================
 if __name__ == "__main__":
     getAllStudents()
 
