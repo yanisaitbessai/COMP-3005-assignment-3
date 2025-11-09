@@ -9,6 +9,9 @@
 
 ---
 
+## Video demonstration
+- https://youtu.be/vSs1Nh6ivnA 
+
 ## Overview
 This project demonstrates how to connect a Python application to a **PostgreSQL** database and perform the four fundamental **CRUD operations** (Create, Read, Update, Delete).  
 The program interacts with a database named `studentdb` containing a single table called `students`.  
