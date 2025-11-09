@@ -59,6 +59,9 @@ INSERT INTO students (first_name, last_name, email, enrollment_date) VALUES
 ('Jane', 'Smith', 'jane.smith@example.com', '2023-09-01'),
 ('Jim', 'Beam', 'jim.beam@example.com', '2023-09-02');"
 
+you can see the table by then typing:
+"SELECT * FROM students;"
+
 **Configure the Connection**
 
 Open app.py and update your PostgreSQL credentials:
@@ -77,6 +80,11 @@ Replace " your_postgres_password" with your actual PostgreSQL password.
 **Run the Program**
 
 Open a terminal in your project folder and run:
+python -m pip install psycopg2
+or
+py -m pip install psycopg2
+
+And now enter,
 - python app.py
 or
 - py app.py
